@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace RealEstateApp
 {
@@ -14,7 +15,7 @@ namespace RealEstateApp
 	public partial class PropertyListPage : ContentPage
 	{
 		IRepository Repository;
-		public ObservableCollection<PropertyListItem> PropertiesCollection { get; } = new ObservableCollection<PropertyListItem>();
+		public ObservableCollection<PropertyListItem> PropertiesCollection { get; set; } = new ObservableCollection<PropertyListItem>();
 		private Location _location;
 
 		public Location Location
@@ -72,7 +73,7 @@ namespace RealEstateApp
 					}
 					catch (Exception)
 					{
-
+						//Error handling
 						throw;
 					}
 				}
@@ -97,6 +98,13 @@ namespace RealEstateApp
 			{
 				this.Location = await Geolocation.GetLocationAsync();
 			}
+			LoadProperties();
+			var newPropList = new ObservableCollection<PropertyListItem>();
+			foreach (var item in PropertiesCollection.OrderByDescending(x => x.Distance))
+			{
+				newPropList.Add(item);
+			}
+			PropertiesCollection = newPropList;
 
 		}
 	}
