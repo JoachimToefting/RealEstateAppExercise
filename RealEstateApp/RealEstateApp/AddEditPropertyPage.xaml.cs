@@ -3,103 +3,130 @@ using RealEstateApp.Services;
 using System.Collections.ObjectModel;
 using System.Linq;
 using TinyIoC;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace RealEstateApp
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddEditPropertyPage : ContentPage
-    {
-        private IRepository Repository;
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class AddEditPropertyPage : ContentPage
+	{
+		private IRepository Repository;
 
-        #region PROPERTIES
-        public ObservableCollection<Agent> Agents { get; }
+		#region PROPERTIES
+		public ObservableCollection<Agent> Agents { get; }
 
-        private Property _property;
-        public Property Property
-        {
-            get => _property;
-            set
-            {
-                _property = value;
-                if (_property.AgentId != null)
-                {
-                    SelectedAgent = Agents.FirstOrDefault(x => x.Id == _property?.AgentId);
-                }
-               
-            }
-        }
-    
-        private Agent _selectedAgent;
+		private Property _property;
+		public Property Property
+		{
+			get => _property;
+			set
+			{
+				_property = value;
+				if (_property.AgentId != null)
+				{
+					SelectedAgent = Agents.FirstOrDefault(x => x.Id == _property?.AgentId);
+				}
 
-        public Agent SelectedAgent
-        {
-            get => _selectedAgent;
-            set
-            {
-                if (Property != null)
-                {
-                    _selectedAgent = value;
-                    Property.AgentId = _selectedAgent?.Id;
-                }                 
-            }
-        }
+			}
+		}
 
-        public string StatusMessage { get; set; }
+		private Agent _selectedAgent;
 
-        public Color StatusColor { get; set; } = Color.White;
-        #endregion
+		public Agent SelectedAgent
+		{
+			get => _selectedAgent;
+			set
+			{
+				if (Property != null)
+				{
+					_selectedAgent = value;
+					Property.AgentId = _selectedAgent?.Id;
+				}
+			}
+		}
 
-        public AddEditPropertyPage(Property property = null)
-        {
-            InitializeComponent();
+		public string StatusMessage { get; set; }
 
-            Repository = TinyIoCContainer.Current.Resolve<IRepository>();
-            Agents = new ObservableCollection<Agent>(Repository.GetAgents());
+		public Color StatusColor { get; set; } = Color.White;
+		#endregion
 
-            if (property == null)
-            {
-                Title = "Add Property";
-                Property = new Property();
-            }
-            else
-            {
-                Title = "Edit Property";
-                Property = property;
-            }
-         
-            BindingContext = this;
-        }
+		public AddEditPropertyPage(Property property = null)
+		{
+			InitializeComponent();
 
-        private async void SaveProperty_Clicked(object sender, System.EventArgs e)
-        {
-            if (IsValid() == false)
-            {
-                StatusMessage = "Please fill in all required fields";
-                StatusColor = Color.Red;
-            }
-            else
-            {
-                Repository.SaveProperty(Property);
-                await Navigation.PopToRootAsync();
-            }   
-        }
+			Repository = TinyIoCContainer.Current.Resolve<IRepository>();
+			Agents = new ObservableCollection<Agent>(Repository.GetAgents());
 
-        public bool IsValid()
-        {
-            if (string.IsNullOrEmpty(Property.Address)
-                || Property.Beds == null
-                || Property.Price == null
-                || Property.AgentId == null)
-                return false;
+			if (property == null)
+			{
+				Title = "Add Property";
+				Property = new Property();
+			}
+			else
+			{
+				Title = "Edit Property";
+				Property = property;
+			}
 
-            return true;
-        }
+			BindingContext = this;
+		}
 
-        private async void CancelSave_Clicked(object sender, System.EventArgs e)
-        {
-            await Navigation.PopToRootAsync();
-        }
-    }
+		private async void SaveProperty_Clicked(object sender, System.EventArgs e)
+		{
+			if (IsValid() == false)
+			{
+				StatusMessage = "Please fill in all required fields";
+				StatusColor = Color.Red;
+			}
+			else
+			{
+				Repository.SaveProperty(Property);
+				await Navigation.PopToRootAsync();
+			}
+		}
+
+		public bool IsValid()
+		{
+			if (string.IsNullOrEmpty(Property.Address)
+				|| Property.Beds == null
+				|| Property.Price == null
+				|| Property.AgentId == null)
+				return false;
+
+			return true;
+		}
+
+		private async void CancelSave_Clicked(object sender, System.EventArgs e)
+		{
+			await Navigation.PopToRootAsync();
+		}
+
+		private async void GetLocation_Clicked(object sender, System.EventArgs e)
+		{
+			var request = new GeolocationRequest(GeolocationAccuracy.Best);
+			try
+			{
+				Property.Location = await Geolocation.GetLocationAsync(request);
+			}
+			catch (FeatureNotSupportedException fnsEx)
+			{
+				StatusMessage = "Feature not supportet error: " + fnsEx.Message;
+			}
+			catch (FeatureNotEnabledException fneEx)
+			{
+				StatusMessage = "Feature not Enabled error: " + fneEx.Message;
+			}
+			catch (PermissionException pEx)
+			{
+				StatusMessage = "Permission denied error: " + pEx.Message;
+			}
+			catch (System.Exception Ex)
+			{
+				StatusMessage = "No location found error: " + Ex.Message;
+			}
+
+		}
+	}
 }

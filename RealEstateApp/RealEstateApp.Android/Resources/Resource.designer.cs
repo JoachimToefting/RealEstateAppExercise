@@ -153,6 +153,7 @@ namespace RealEstateApp.Droid
 			global::Xamarin.Essentials.Resource.Id.text2 = global::RealEstateApp.Droid.Resource.Id.text2;
 			global::Xamarin.Essentials.Resource.Id.time = global::RealEstateApp.Droid.Resource.Id.time;
 			global::Xamarin.Essentials.Resource.Id.title = global::RealEstateApp.Droid.Resource.Id.title;
+			global::Xamarin.Essentials.Resource.Id.view_tree_lifecycle_owner = global::RealEstateApp.Droid.Resource.Id.view_tree_lifecycle_owner;
 			global::Xamarin.Essentials.Resource.Integer.status_bar_notification_info_maxnum = global::RealEstateApp.Droid.Resource.Integer.status_bar_notification_info_maxnum;
 			global::Xamarin.Essentials.Resource.Layout.browser_actions_context_menu_page = global::RealEstateApp.Droid.Resource.Layout.browser_actions_context_menu_page;
 			global::Xamarin.Essentials.Resource.Layout.browser_actions_context_menu_row = global::RealEstateApp.Droid.Resource.Layout.browser_actions_context_menu_row;
@@ -12147,19 +12148,22 @@ namespace RealEstateApp.Droid
 			public const int view_offset_helper = 2131231018;
 			
 			// aapt resource value: 0x7F08012B
-			public const int view_tree_saved_state_registry_owner = 2131231019;
+			public const int view_tree_lifecycle_owner = 2131231019;
 			
 			// aapt resource value: 0x7F08012C
-			public const int visible = 2131231020;
+			public const int view_tree_saved_state_registry_owner = 2131231020;
 			
 			// aapt resource value: 0x7F08012D
-			public const int visible_removing_fragment_view_tag = 2131231021;
+			public const int visible = 2131231021;
 			
 			// aapt resource value: 0x7F08012E
-			public const int withText = 2131231022;
+			public const int visible_removing_fragment_view_tag = 2131231022;
 			
 			// aapt resource value: 0x7F08012F
-			public const int wrap_content = 2131231023;
+			public const int withText = 2131231023;
+			
+			// aapt resource value: 0x7F080130
+			public const int wrap_content = 2131231024;
 			
 			static Id()
 			{
