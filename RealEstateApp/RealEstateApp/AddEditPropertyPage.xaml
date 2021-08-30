@@ -44,7 +44,7 @@
 							</FormattedString>
 						</Label.FormattedText>
 					</Label>
-					<Label IsVisible="{Binding Property.Location,Converter={converters:LocationBoolConverter}}" HorizontalOptions="Center">
+					<Label IsVisible="{Binding Property.Location ,Converter={converters:LocationBoolConverter}}" HorizontalOptions="Center">
 						<Label.FormattedText>
 							<FormattedString>
 								<Span Text="{Binding Property.Location.Latitude, StringFormat='{0:F2}'}"/>

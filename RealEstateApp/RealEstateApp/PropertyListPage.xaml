@@ -5,11 +5,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:fa="clr-namespace:FontAwesome"
              mc:Ignorable="d"
+			 xmlns:models="clr-namespace:RealEstateApp.Models"
              x:Class="RealEstateApp.PropertyListPage">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddProperty_Clicked" />
-    </ContentPage.ToolbarItems>
+		<ToolbarItem IconImageSource="fa_sort_amount_asc.png" x:Name="Sortbutton" Clicked="Sortbutton_Clicked"/>
+	</ContentPage.ToolbarItems>
     
     <StackLayout>
         <ListView
@@ -25,7 +27,7 @@
             ItemsSource="{Binding PropertiesCollection}"
             VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="models:PropertyListItem">
                     <ViewCell>
                         <Grid
                             Margin="0,0,0,20"
@@ -101,7 +103,8 @@
                                     Grid.Row="3"
                                     FontSize="13"
                                     Text="{Binding Property.LandSize, StringFormat='Land Size: {0} &#x33a1;'}" />
-                            </Grid>
+								<Label Grid.Row="4" FontSize="13" Text="{Binding Distance ,StringFormat='{0:F2} km'}"/>
+							</Grid>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

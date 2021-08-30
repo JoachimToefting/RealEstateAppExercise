@@ -22,9 +22,17 @@ namespace RealEstateApp.Models
                 RaisePropertyChanged();
             }
         }
+		private double _distance;
+
+		public double Distance
+		{
+			get { return _distance; }
+			set { _distance = value; }
+		}
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
+
+		public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {

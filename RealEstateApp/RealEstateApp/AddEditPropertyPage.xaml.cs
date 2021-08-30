@@ -102,7 +102,6 @@ namespace RealEstateApp
 		{
 			await Navigation.PopToRootAsync();
 		}
-
 		private async void GetLocation_Clicked(object sender, System.EventArgs e)
 		{
 			var request = new GeolocationRequest(GeolocationAccuracy.Best);
