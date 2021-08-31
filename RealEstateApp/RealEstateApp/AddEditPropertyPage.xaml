@@ -53,8 +53,8 @@
 							</FormattedString>
 						</Label.FormattedText>
 					</Label>
-					<Button Text="{Static fa:IconFont.SearchLocation}" FontFamily="FA-solid" x:Name="GetLocation" Clicked="GetLocation_Clicked"/>
-					<Button Text="{Static fa:IconFont.Home}" FontFamily="FA-solid" x:Name="GetHome" Clicked="GetHome_Clicked"/>
+					<Button Text="{Static fa:IconFont.SearchLocation}" FontFamily="FA-solid" x:Name="GetLocation" Clicked="GetLocation_Clicked" IsEnabled="False"/>
+					<Button Text="{Static fa:IconFont.Home}" FontFamily="FA-solid" x:Name="GetHome" Clicked="GetHome_Clicked" IsEnabled="False"/>
 
 					<Label FontSize="Medium" FontFamily="FA-solid">
 							<Label.FormattedText>

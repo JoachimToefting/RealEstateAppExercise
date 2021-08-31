@@ -70,8 +70,30 @@ namespace RealEstateApp
 				Title = "Edit Property";
 				Property = property;
 			}
-
 			BindingContext = this;
+			Connectivity.ConnectivityChanged += ConnectionChanged;
+			if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+			{
+				DisplayAlert("Advarsel", "Intet innernet", "Ok");
+			}
+			else
+			{
+				GetHome.IsEnabled = true;
+				GetLocation.IsEnabled = true;
+			}
+		}
+		private void ConnectionChanged(object sender, System.EventArgs e)
+		{
+			if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+			{
+				GetHome.IsEnabled = true;
+				GetLocation.IsEnabled = true;
+			}
+			else
+			{
+				GetHome.IsEnabled = false;
+				GetLocation.IsEnabled = false;
+			}
 		}
 
 		private async void SaveProperty_Clicked(object sender, System.EventArgs e)
