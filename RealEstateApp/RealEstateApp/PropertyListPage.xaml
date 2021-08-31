@@ -10,7 +10,11 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddProperty_Clicked" />
-		<ToolbarItem IconImageSource="fa_sort_amount_asc.png" x:Name="Sortbutton" Clicked="Sortbutton_Clicked"/>
+		<ToolbarItem  x:Name="Sortbutton" Clicked="Sortbutton_Clicked">
+			<ToolbarItem.IconImageSource>
+				<FontImageSource FontFamily="FA-solid" Size="Medium" Glyph="{Static fa:IconFont.SortAmountDown}"/>
+			</ToolbarItem.IconImageSource>
+		</ToolbarItem>
 	</ContentPage.ToolbarItems>
     
     <StackLayout>
