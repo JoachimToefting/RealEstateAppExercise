@@ -83,7 +83,79 @@ namespace RealEstateApp
 				GetLocation.IsEnabled = true;
 			}
 			#endregion
+			#region 3.7
+			Battery.BatteryInfoChanged += BatteryChange;
+			#endregion
 		}
+		
+		#region 3.7
+		private void BatteryChange(object sender, System.EventArgs e)
+		{
+			if (Battery.ChargeLevel <= 0.2f)
+			{
+				if (Battery.PowerSource == BatteryPowerSource.AC)
+				{
+					StatusColor = Color.Green;
+					StatusMessage = "Battery charging";
+				}
+				else if (Battery.EnergySaverStatus == EnergySaverStatus.On)
+				{
+					StatusColor = Color.Yellow;
+					StatusMessage = "Battery energy saver";
+				}
+				else
+				{
+					StatusColor = Color.Red;
+					StatusMessage = "Battery low";
+				}
+			}
+			else
+			{
+				StatusMessage = "";
+				StatusColor = Color.White;
+			}
+		}
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+			Battery.BatteryInfoChanged -= BatteryChange;
+		}
+		#region Flash
+		private bool FlashOn = false;
+		private async void Flashlight_Clicked(object sender, System.EventArgs e)
+		{
+			try
+			{
+				if (FlashOn)
+				{
+					await Flashlight.TurnOffAsync();
+					FlashOn = false;
+				}
+				else
+				{
+					await Flashlight.TurnOnAsync();
+					FlashOn = true;
+				}
+			}
+			catch (FeatureNotSupportedException fnsEx)
+			{
+				StatusMessage = "Feature not supportet error: " + fnsEx.Message;
+			}
+			catch (FeatureNotEnabledException fneEx)
+			{
+				StatusMessage = "Feature not Enabled error: " + fneEx.Message;
+			}
+			catch (PermissionException pEx)
+			{
+				StatusMessage = "Permission denied error: " + pEx.Message;
+			}
+			catch (System.Exception Ex)
+			{
+				StatusMessage = "No location found error: " + Ex.Message;
+			}
+		}
+		#endregion
+		#endregion
 		#region 3.4 event
 		private void ConnectionChanged(object sender, System.EventArgs e)
 		{

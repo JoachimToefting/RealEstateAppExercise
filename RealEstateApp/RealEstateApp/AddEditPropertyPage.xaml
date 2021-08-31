@@ -24,6 +24,7 @@
                 Text="{Binding StatusMessage}" />
 			<ScrollView VerticalOptions="FillAndExpand">
 				<StackLayout Padding="15" Spacing="20">
+					<Button Text="{Static fa:IconFont.Lightbulb}" FontFamily="FA-solid" Clicked="Flashlight_Clicked"/>
 
 					<Label FontSize="Medium" FontFamily="FA-solid">
 						<Label.FormattedText>
