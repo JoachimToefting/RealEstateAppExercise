@@ -106,6 +106,9 @@ namespace RealEstateApp
 			{
 				StatusMessage = "Please fill in all required fields";
 				StatusColor = Color.Red;
+				#region 3.5
+				Vibration.Vibrate(5000);
+				#endregion
 			}
 			else
 			{
