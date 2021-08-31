@@ -1,5 +1,6 @@
 ﻿using RealEstateApp.Models;
 using RealEstateApp.Services;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using TinyIoC;
@@ -104,10 +105,16 @@ namespace RealEstateApp
 		}
 		private async void GetLocation_Clicked(object sender, System.EventArgs e)
 		{
-			var request = new GeolocationRequest(GeolocationAccuracy.Best);
+			GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Default);
 			try
 			{
 				Property.Location = await Geolocation.GetLocationAsync(request);
+
+				var preadress = await Geocoding.GetPlacemarksAsync(Property.Location.Latitude, Property.Location.Longitude);
+
+				var pre = preadress.FirstOrDefault();
+
+				Property.Address = preadress?.FirstOrDefault().ToString();
 			}
 			catch (FeatureNotSupportedException fnsEx)
 			{
@@ -126,6 +133,32 @@ namespace RealEstateApp
 				StatusMessage = "No location found error: " + Ex.Message;
 			}
 
+		}
+
+		private async void GetHome_Clicked(object sender, System.EventArgs e)
+		{
+			try
+			{
+				IEnumerable<Location> locations = await Geocoding.GetLocationsAsync(Property.Address);
+
+				Property.Location = locations?.FirstOrDefault();
+			}
+			catch (FeatureNotSupportedException fnsEx)
+			{
+				StatusMessage = "Feature not supportet error: " + fnsEx.Message;
+			}
+			catch (FeatureNotEnabledException fneEx)
+			{
+				StatusMessage = "Feature not Enabled error: " + fneEx.Message;
+			}
+			catch (PermissionException pEx)
+			{
+				StatusMessage = "Permission denied error: " + pEx.Message;
+			}
+			catch (System.Exception Ex)
+			{
+				StatusMessage = "No location found error: " + Ex.Message;
+			}
 		}
 	}
 }

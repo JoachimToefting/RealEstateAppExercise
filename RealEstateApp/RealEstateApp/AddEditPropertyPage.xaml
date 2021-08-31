@@ -54,8 +54,9 @@
 						</Label.FormattedText>
 					</Label>
 					<Button Text="{Static fa:IconFont.SearchLocation}" FontFamily="FA-solid" x:Name="GetLocation" Clicked="GetLocation_Clicked"/>
+					<Button Text="{Static fa:IconFont.Home}" FontFamily="FA-solid" x:Name="GetHome" Clicked="GetHome_Clicked"/>
 
-						<Label FontSize="Medium" FontFamily="FA-solid">
+					<Label FontSize="Medium" FontFamily="FA-solid">
 							<Label.FormattedText>
 								<FormattedString>
 									<Span Text="{Static fa:IconFont.Tag}"/>
