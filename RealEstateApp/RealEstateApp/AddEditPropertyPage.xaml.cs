@@ -71,6 +71,7 @@ namespace RealEstateApp
 				Property = property;
 			}
 			BindingContext = this;
+			#region 3.4
 			Connectivity.ConnectivityChanged += ConnectionChanged;
 			if (Connectivity.NetworkAccess != NetworkAccess.Internet)
 			{
@@ -81,7 +82,9 @@ namespace RealEstateApp
 				GetHome.IsEnabled = true;
 				GetLocation.IsEnabled = true;
 			}
+			#endregion
 		}
+		#region 3.4 event
 		private void ConnectionChanged(object sender, System.EventArgs e)
 		{
 			if (Connectivity.NetworkAccess == NetworkAccess.Internet)
@@ -95,6 +98,7 @@ namespace RealEstateApp
 				GetLocation.IsEnabled = false;
 			}
 		}
+		#endregion
 
 		private async void SaveProperty_Clicked(object sender, System.EventArgs e)
 		{
