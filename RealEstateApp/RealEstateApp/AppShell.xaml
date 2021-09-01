@@ -1,12 +1,14 @@
 ﻿<Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	   x:Class="RealEstateApp.AppShell"
+	   xmlns:fa="clr-namespace:FontAwesome"
 	   xmlns:rea="clr-namespace:RealEstateApp">
 	<Shell.TabBarIsVisible>
 		false
 	</Shell.TabBarIsVisible>
 	<FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
 		<ShellContent Title="Properties" Icon="" ContentTemplate="{DataTemplate rea:PropertyListPage}"/>
+		<ShellContent Title="Compass" Icon="{Static fa:IconFont.Compass}" ContentTemplate="{DataTemplate rea:CompassPage}"/>
 	</FlyoutItem>
 	<MenuItem Text="About"/>
 </Shell>
