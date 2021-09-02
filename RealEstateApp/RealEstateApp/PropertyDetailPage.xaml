@@ -97,6 +97,8 @@
 						<TapGestureRecognizer Tapped="Phone_Tapped"/>
 					</Label.GestureRecognizers>
 				</Label>
+				<Button x:Name="Mapbtn" Text="{Static fa:IconFont.MapMarkedAlt}" FontFamily="FA-solid" Clicked="Map_Clicked"/>
+				<Button x:Name="Directionbtn" Text="{Static fa:IconFont.Directions}" FontFamily="FA-solid" Clicked="Direction_Clicked"/>
 			</StackLayout>
 			<Label
                 Grid.Row="9"

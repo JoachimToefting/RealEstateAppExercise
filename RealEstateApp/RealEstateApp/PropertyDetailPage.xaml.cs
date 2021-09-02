@@ -119,5 +119,28 @@ namespace RealEstateApp
 				}
 			}
 		}
+
+		private async void Map_Clicked(object sender, EventArgs e)
+		{
+			var location = new Location((double)Property.Latitude, (double)Property.Longitude);
+
+			var options = new MapLaunchOptions()
+			{
+				Name = "Bo here",
+				NavigationMode = NavigationMode.None
+			};
+
+			await location.OpenMapsAsync();
+		}
+
+		private async void Direction_Clicked(object sender, EventArgs e)
+		{
+			var options = new MapLaunchOptions()
+			{
+				Name = "Bo here",
+				NavigationMode = NavigationMode.Driving
+			};
+			await Map.OpenAsync(new Location((double)Property.Latitude, (double)Property.Longitude), options);
+		}
 	}
 }
