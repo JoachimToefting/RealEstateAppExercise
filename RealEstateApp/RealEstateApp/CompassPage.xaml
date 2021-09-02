@@ -6,7 +6,7 @@
 			 x:DataType="rea:CompassPage"
              x:Class="RealEstateApp.CompassPage">
 	<ContentPage.Content>
-		<Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*" >
+		<Grid RowDefinitions="Auto,*,Auto,Auto" ColumnDefinitions="*" >
 			<Label FontSize="Large" FontFamily="FA-solid" Margin="0,20" HorizontalOptions="Center">
 				<Label.FormattedText>
 					<FormattedString>
@@ -29,6 +29,7 @@
             Margin="0,20" 
             Grid.Row="2" Grid.Column="0" 
             HorizontalOptions="Center" />
+			<Button Grid.Row="3" Text="Save" x:Name="Save" Clicked="Save_Clicked"/>
 		</Grid>
 	</ContentPage.Content>
 </ContentPage>

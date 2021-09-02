@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RealEstateApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,6 @@ namespace RealEstateApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CompassPage : ContentPage
 	{
-		public enum Aspects
-		{
-			North = 0,
-			East = 90,
-			South = 180,
-			West = 270
-		}
 		private Aspects _currentAspect;
 
 		public Aspects CurrentAspect
@@ -42,10 +36,12 @@ namespace RealEstateApp
 			get { return _currentHeading; }
 			set { _currentHeading = value; }
 		}
-		public CompassPage()
+		private Property _property { get; set; }
+		public CompassPage(Property property)
 		{
 			InitializeComponent();
 			this.BindingContext = this;
+			this._property = property;
 		}
 		#region Event handlers
 		protected override void OnAppearing()
@@ -66,6 +62,7 @@ namespace RealEstateApp
 			CurrentHeading = e.Reading.HeadingMagneticNorth;
 			RotationAngle = CalculateRotation(CurrentHeading);
 			CurrentAspect = CalculateAspect(CurrentHeading);
+			_property.Aspect = CurrentAspect;
 		}
 		private double CalculateRotation(double heading)
 		{
@@ -74,7 +71,17 @@ namespace RealEstateApp
 		private Aspects CalculateAspect(double heading)
 		{
 			int secment = (int)(Math.Round(heading / 90) * 90);
+			//North loop around
+			if (secment == 360)
+			{
+				secment = 0;
+			}
 			return (Aspects)secment;
+		}
+
+		private async void Save_Clicked(object sender, EventArgs e)
+		{
+			await Navigation.PopAsync();
 		}
 	}
 }

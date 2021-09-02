@@ -8,7 +8,7 @@
 	</Shell.TabBarIsVisible>
 	<FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
 		<ShellContent Title="Properties" Icon="" ContentTemplate="{DataTemplate rea:PropertyListPage}"/>
-		<ShellContent Title="Compass" Icon="{Static fa:IconFont.Compass}" ContentTemplate="{DataTemplate rea:CompassPage}"/>
+		<ShellContent Title="Height Calculator" Icon="{Static fa:IconFont.Atom}" ContentTemplate="{DataTemplate rea:HeightCalculatorPage}"/>
 	</FlyoutItem>
 	<MenuItem Text="About"/>
 </Shell>

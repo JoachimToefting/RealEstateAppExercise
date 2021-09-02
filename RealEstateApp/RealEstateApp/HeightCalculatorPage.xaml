@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:rea="clr-namespace:RealEstateApp"
+			 xmlns:model="clr-namespace:RealEstateApp.Models"
+			 xmlns:converters="clr-namespace:RealEstateApp.Converters"
+             x:Class="RealEstateApp.HeightCalculatorPage">
+    <ContentPage.Content>
+		<Grid x:DataType="rea:HeightCalculatorPage" >
+			<Grid.RowDefinitions>
+				<RowDefinition Height="100"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Label Grid.Row="0" Text="{Binding CurrentAltitude, StringFormat='Current Altitude {0:N2} m'}" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Margin="5" />
+			<Entry Grid.Row="1" Placeholder="Label name" Text="{Binding LabelName}"/>
+			<Button x:Name="SaveButton" Grid.Row="2" Text="Save" Clicked="SaveButton_Clicked"/>
+			<ListView ItemsSource="{Binding Measurements}" Grid.Row="3">
+				<ListView.ItemTemplate>
+					<DataTemplate x:DataType="model:BarometerMeasurement">
+						<ViewCell>
+							<Label VerticalOptions="Center" Margin="5" FontSize="Medium">
+								<Label.FormattedText>
+									<FormattedString>
+										<Span Text="{Binding Label, StringFormat='{0}:'}"/>
+										<Span Text="{Binding Altitude, StringFormat=' {0:N2}m'}"/>
+										<Span Text="{Binding HeightChange, Converter={converters:HeightchangeConverter}}"/>
+									</FormattedString>
+								</Label.FormattedText>
+							</Label>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+			<Label Grid.Row="4" Text="{Binding CurrentPressure, StringFormat='Current Pressure: {0:F2} hPa'}" VerticalOptions="EndAndExpand" HorizontalOptions="Center"/>
+		</Grid>
+    </ContentPage.Content>
+</ContentPage>

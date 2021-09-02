@@ -56,6 +56,10 @@
 					</Label>
 					<Button Text="{Static fa:IconFont.SearchLocation}" FontFamily="FA-solid" x:Name="GetLocation" Clicked="GetLocation_Clicked" IsEnabled="False"/>
 					<Button Text="{Static fa:IconFont.Home}" FontFamily="FA-solid" x:Name="GetHome" Clicked="GetHome_Clicked" IsEnabled="False"/>
+					<Grid RowDefinitions="*" ColumnDefinitions="*,*">
+						<Label Grid.Column="0" VerticalTextAlignment="Center" HorizontalOptions="Center" Text="{Binding Property.Aspect}"/>
+						<Button x:Name="CompassButton" Grid.Column="1" Text="{Static fa:IconFont.Compass}" FontFamily="FA-solid" Clicked="CompassButton_Clicked"/>
+					</Grid>
 
 					<Label FontSize="Medium" FontFamily="FA-solid">
 							<Label.FormattedText>

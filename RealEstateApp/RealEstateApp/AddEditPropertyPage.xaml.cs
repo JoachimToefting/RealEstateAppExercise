@@ -261,5 +261,10 @@ namespace RealEstateApp
 				StatusMessage = "No location found error: " + Ex.Message;
 			}
 		}
+
+		private async void CompassButton_Clicked(object sender, System.EventArgs e)
+		{
+			await Navigation.PushAsync(new CompassPage(_property));
+		}
 	}
 }
