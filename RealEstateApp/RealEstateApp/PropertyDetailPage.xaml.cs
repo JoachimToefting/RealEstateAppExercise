@@ -1,5 +1,8 @@
 ﻿using RealEstateApp.Models;
 using RealEstateApp.Services;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -52,7 +55,7 @@ namespace RealEstateApp
 			{
 				TextReaderReset();
 			}
-			
+
 		}
 		private void TextReaderReset()
 		{
@@ -65,6 +68,56 @@ namespace RealEstateApp
 		{
 			Property property = (Property)sender;
 			await Navigation.PushAsync(new ImageListPage(property));
+		}
+
+		private async void Email_Tapped(object sender, System.EventArgs e)
+		{
+			var folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			var attachmentFilePath = Path.Combine(folder, "property.txt");
+			File.WriteAllText(attachmentFilePath, $"{Property.Address}");
+
+			EmailMessage message = new EmailMessage
+			{
+				Subject = "Olla",
+				Body = "nice " + Property.Vendor.FullName,
+				To = new List<string>() { Property.Vendor.Email },
+				Attachments = new List<EmailAttachment>() { new EmailAttachment(attachmentFilePath)}
+			};
+			await Email.ComposeAsync(message);
+		}
+
+		private async void Phone_Tapped(object sender, System.EventArgs e)
+		{
+			string phone = "Phone";
+			string sms = "SMS";
+			string whatdo = await DisplayActionSheet("What to do", "Back", null, phone, sms);
+			if (whatdo == phone)
+			{
+				try
+				{
+					PhoneDialer.Open(Property.Vendor.Phone);
+				}
+				catch (FeatureNotSupportedException ex)
+				{
+					//not supported
+				}
+			}
+			else if (whatdo == sms)
+			{
+				try
+				{
+					SmsMessage msg = new SmsMessage
+					{
+						Body = "hey " + Property.Vendor.FullName + " angående " + Property.Address,
+						Recipients = new List<string>() { Property.Vendor.Phone }
+					};
+					await Sms.ComposeAsync();
+				}
+				catch (FeatureNotSupportedException ex)
+				{
+					//not supported
+				}
+			}
 		}
 	}
 }

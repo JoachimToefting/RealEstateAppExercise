@@ -13,7 +13,7 @@
 	</ContentPage.ToolbarItems>
 
 	<ScrollView VerticalOptions="FillAndExpand">
-		<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" 
+		<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" 
               Padding="15">
 			<Image
                 Grid.Row="0"
@@ -85,12 +85,25 @@
                 FontSize="14"
                 Text="{Binding Property.Description}" />
 			<Button Grid.Row="7" x:Name="TextReaderButton" Text="{Static fa:IconFont.Play}" FontFamily="FA-solid" Clicked="TextReader_Clicked" TextColor="White" BackgroundColor="Green"/>
+			<StackLayout Grid.Row="8">
+				<Label Text="{Binding Property.Vendor.FullName}"/>
+				<Label Text="{Binding Property.Vendor.Email}" x:Name="Emaillbl" TextColor="Blue">
+					<Label.GestureRecognizers>
+						<TapGestureRecognizer Tapped="Email_Tapped"/>
+					</Label.GestureRecognizers>
+				</Label>
+				<Label Text="{Binding Property.Vendor.Phone}" x:Name="Phonelbl" TextColor="Blue">
+					<Label.GestureRecognizers>
+						<TapGestureRecognizer Tapped="Phone_Tapped"/>
+					</Label.GestureRecognizers>
+				</Label>
+			</StackLayout>
 			<Label
-                Grid.Row="8"
+                Grid.Row="9"
                 FontAttributes="Bold"
                 FontSize="14"
                 Text="Listed by:" />
-			<Grid Grid.Row="9">
+			<Grid Grid.Row="10">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="*" />
