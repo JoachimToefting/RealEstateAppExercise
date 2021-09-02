@@ -3,6 +3,7 @@ using RealEstateApp.Services;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TinyIoC;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -22,6 +23,8 @@ namespace RealEstateApp
 			IRepository Repository = TinyIoCContainer.Current.Resolve<IRepository>();
 			Agent = Repository.GetAgents().FirstOrDefault(x => x.Id == Property.AgentId);
 
+			TabCommand = new Command(OnTabbed);
+
 			BindingContext = this;
 		}
 
@@ -29,6 +32,7 @@ namespace RealEstateApp
 
 		public Property Property { get; set; }
 		public CancellationTokenSource Cts { get; set; }
+		public ICommand TabCommand { get; }
 
 		private async void EditProperty_Clicked(object sender, System.EventArgs e)
 		{
@@ -43,7 +47,6 @@ namespace RealEstateApp
 				TextReaderButton.Text = "\uf04d";
 				await TextToSpeech.SpeakAsync(Property.Description, Cts.Token);
 				TextReaderReset();
-				
 			}
 			else
 			{
@@ -56,6 +59,12 @@ namespace RealEstateApp
 			TextReaderButton.BackgroundColor = Color.Green;
 			TextReaderButton.Text = "\uf04b";
 			Cts.Cancel();
+		}
+
+		private async void OnTabbed(object sender)
+		{
+			Property property = (Property)sender;
+			await Navigation.PushAsync(new ImageListPage(property));
 		}
 	}
 }

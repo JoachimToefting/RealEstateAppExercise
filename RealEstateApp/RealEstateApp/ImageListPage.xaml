@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:realestateapp="clr-namespace:RealEstateApp"
+			 xmlns:model="clr-namespace:RealEstateApp.Models"
+			 xmlns:converters="clr-namespace:RealEstateApp.Converters"
+			 x:Class="RealEstateApp.ImageListPage"
+			 x:DataType="realestateapp:ImageListPage">
+	<ContentPage.Content>
+		<CarouselView ItemsSource="{Binding myImageUrls}" Position="{Binding Position}">
+			<CarouselView.ItemTemplate>
+				<DataTemplate x:DataType="x:String">
+					<Image Source="{Binding}" />
+				</DataTemplate>
+			</CarouselView.ItemTemplate>
+		</CarouselView>
+	</ContentPage.Content>
+</ContentPage>
