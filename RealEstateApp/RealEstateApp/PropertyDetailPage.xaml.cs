@@ -81,7 +81,7 @@ namespace RealEstateApp
 				Subject = "Olla",
 				Body = "nice " + Property.Vendor.FullName,
 				To = new List<string>() { Property.Vendor.Email },
-				Attachments = new List<EmailAttachment>() { new EmailAttachment(attachmentFilePath)}
+				Attachments = new List<EmailAttachment>() { new EmailAttachment(attachmentFilePath) }
 			};
 			await Email.ComposeAsync(message);
 		}
@@ -141,6 +141,25 @@ namespace RealEstateApp
 				NavigationMode = NavigationMode.Driving
 			};
 			await Map.OpenAsync(new Location((double)Property.Latitude, (double)Property.Longitude), options);
+		}
+
+		private void Linkbtn_Clicked(object sender, EventArgs e)
+		{
+			BrowserLaunchOptions blo = new BrowserLaunchOptions()
+			{
+				LaunchMode = BrowserLaunchMode.SystemPreferred,
+				PreferredControlColor = Color.Red,
+				PreferredToolbarColor = Color.Blue,
+				TitleMode = BrowserTitleMode.Show
+			};
+			Browser.OpenAsync("https://www.EucSyd.dk", blo);
+		}
+		private async void PDF_Clicked(object sender, EventArgs e)
+		{
+			await Launcher.OpenAsync(new OpenFileRequest
+			{
+				File = new ReadOnlyFile("ontract.pdf")
+			});
 		}
 	}
 }

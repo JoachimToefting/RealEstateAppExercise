@@ -99,6 +99,8 @@
 				</Label>
 				<Button x:Name="Mapbtn" Text="{Static fa:IconFont.MapMarkedAlt}" FontFamily="FA-solid" Clicked="Map_Clicked"/>
 				<Button x:Name="Directionbtn" Text="{Static fa:IconFont.Directions}" FontFamily="FA-solid" Clicked="Direction_Clicked"/>
+				<Button x:Name="Linkbtn" Text="{Static fa:IconFont.Globe}" FontFamily="FA-solid" Clicked="Linkbtn_Clicked"/>
+				<Button x:Name="PDFbtn" Text="{Static fa:IconFont.FileSignature}" FontFamily="FA-solid" Clicked="PDF_Clicked"/>
 			</StackLayout>
 			<Label
                 Grid.Row="9"
