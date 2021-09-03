@@ -16,7 +16,7 @@ namespace RealEstateApp.Services.Repository
 
 		public MockRepository()
 		{
-			LoadFiles();
+			//LoadFiles();
 			LoadProperties();
 			LoadAgents();
 		}
