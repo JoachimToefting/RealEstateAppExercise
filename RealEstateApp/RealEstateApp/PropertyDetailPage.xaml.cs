@@ -158,7 +158,7 @@ namespace RealEstateApp
 		{
 			await Launcher.OpenAsync(new OpenFileRequest
 			{
-				File = new ReadOnlyFile("ontract.pdf")
+				File = new ReadOnlyFile("contract.pdf")
 			});
 		}
 	}
