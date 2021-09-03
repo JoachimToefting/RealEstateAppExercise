@@ -25,6 +25,7 @@ namespace RealEstateApp.Models
         public Location Location { get; set; }
         public Aspects Aspect { get; set; }
         public Vendor Vendor { get; set; }
+        public string NeighbourhoodUrl { get; set; }
         public string ContractFilePath { get; set; }
         public int? Price { get; set; }
         public string Description { get; set; }

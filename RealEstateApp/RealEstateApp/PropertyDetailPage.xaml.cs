@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TinyIoC;
+using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -158,8 +159,36 @@ namespace RealEstateApp
 		{
 			await Launcher.OpenAsync(new OpenFileRequest
 			{
-				File = new ReadOnlyFile("contract.pdf")
+				File = new ReadOnlyFile(Property.ContractFilePath)
 			});
+		}
+
+		private async void Sharbtn_Clicked(object sender, EventArgs e)
+		{
+			var file = new ShareTextRequest
+			{
+				Text = Property.Address + Property.Price + Property.Beds,
+				Title = "Share Property",
+				Subject = "A property you may be interested in",
+				Uri = Property.NeighbourhoodUrl
+			};
+			await Share.RequestAsync(file);
+		}
+		private async void Sharefile_Clicked(object sender, EventArgs e)
+		{
+			var file = new ShareFileRequest
+			{
+				Title = "Share Property Contract",
+				File = new ShareFile(Property.ContractFilePath)
+			};
+			await Share.RequestAsync(file);
+		}
+
+		private async void Clipboardbtn_Clicked(object sender, EventArgs e)
+		{
+			string jsonString = JsonConvert.SerializeObject(Property);
+
+			await Clipboard.SetTextAsync(jsonString);
 		}
 	}
 }

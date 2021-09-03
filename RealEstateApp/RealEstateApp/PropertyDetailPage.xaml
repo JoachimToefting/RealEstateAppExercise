@@ -101,6 +101,9 @@
 				<Button x:Name="Directionbtn" Text="{Static fa:IconFont.Directions}" FontFamily="FA-solid" Clicked="Direction_Clicked"/>
 				<Button x:Name="Linkbtn" Text="{Static fa:IconFont.Globe}" FontFamily="FA-solid" Clicked="Linkbtn_Clicked"/>
 				<Button x:Name="PDFbtn" Text="{Static fa:IconFont.FileSignature}" FontFamily="FA-solid" Clicked="PDF_Clicked"/>
+				<Button x:Name="Sharbtn" Text="{Static fa:IconFont.ShareAlt}" FontFamily="FA-solid" Clicked="Sharbtn_Clicked"/>
+				<Button x:Name="Sharefilebtn" Text="{Static fa:IconFont.ShareSquare}" FontFamily="FA-solid" Clicked="Sharefile_Clicked"/>
+				<Button x:Name="Clipboardbtn" Text="{Static fa:IconFont.Clipboard}" FontFamily="FA-solid" Clicked="Clipboardbtn_Clicked"/>
 			</StackLayout>
 			<Label
                 Grid.Row="9"
