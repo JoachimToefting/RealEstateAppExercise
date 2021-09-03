@@ -9,6 +9,7 @@
 	<FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
 		<ShellContent Title="Properties" Icon="" ContentTemplate="{DataTemplate rea:PropertyListPage}"/>
 		<ShellContent Title="Height Calculator" Icon="{Static fa:IconFont.Atom}" ContentTemplate="{DataTemplate rea:HeightCalculatorPage}"/>
+		<ShellContent Title="TTS Settings" Icon="{Static fa:IconFont.Cog}" ContentTemplate="{DataTemplate rea:SettingsPage}"/>
 	</FlyoutItem>
 	<MenuItem Text="About"/>
 </Shell>

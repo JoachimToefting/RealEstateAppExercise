@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:rea="clr-namespace:RealEstateApp"
+             x:Class="RealEstateApp.SettingsPage"
+			 x:DataType="rea:SettingsPage">
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+			<Label Text="Pitch"/>
+			<Slider Value="{Binding PitchValue}" Maximum="2" Minimum="0"/>
+			<Label Text="{Binding PitchValue, StringFormat='{0:N2} Pitch value'}"/>
+			<Label Text="Volume"/>
+			<Slider Value="{Binding VolumeValue}" Maximum="1" Minimum="0"/>
+			<Label Text="{Binding VolumeValue, StringFormat='{0:N2} Volume value'}"/>
+			<Button x:Name="Save" Text="Save" Clicked="OnSave_Clicked"/>
+		</StackLayout>
+    </ContentPage.Content>
+</ContentPage>

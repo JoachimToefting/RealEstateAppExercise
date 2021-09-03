@@ -49,7 +49,12 @@ namespace RealEstateApp
 				Cts = new CancellationTokenSource();
 				TextReaderButton.BackgroundColor = Color.Red;
 				TextReaderButton.Text = "\uf04d";
-				await TextToSpeech.SpeakAsync(Property.Description, Cts.Token);
+
+				SpeechOptions so = new SpeechOptions();
+				so.Pitch = Preferences.Get("PitchValue", 1f, "TextToSpeech");
+				so.Volume = Preferences.Get("VolumeValue", 0.75f, "TextToSpeech");
+
+				await TextToSpeech.SpeakAsync(Property.Description, so, Cts.Token);
 				TextReaderReset();
 			}
 			else
